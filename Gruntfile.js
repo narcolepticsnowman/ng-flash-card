@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         },
         concat: {
             dist: {
-                src: ['js/module.js','js/*.js'],
+                src: ['js/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             }
         },
         jshint:{
-            beforeconcat: ['js/module.js','js/*.js'],
+            beforeconcat: ['js/*.js'],
             afterconcat: ['dist/<%= pkg.name %>.js']
         },
         cssmin:{
@@ -48,11 +48,11 @@ module.exports = function(grunt) {
         },
         watch:{
             scripts:{
-                files: ['**/*.js','!**/dist/**'],
+                files: ['js/*.js'],
                 tasks: ['concat','uglify']
             },
             styles:{
-                files: ['styles/**/*.css'],
+                files: ['css/*.css'],
                 tasks: ['cssmin']
             }
         }

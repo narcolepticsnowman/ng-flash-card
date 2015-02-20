@@ -5,58 +5,58 @@
     <title>ngFlashCard Sample</title>
     <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="../dist/ngFlashCard.js"></script>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../dist/ngFlashCard.min.css"/>
     <script>
         angular.module("testModule",['ngFlashCard']).run(['$rootScope',function($rootScope){
             $rootScope.exampleCardGroups =[
-                {"name": "Chapter 5", "cards": [
-                    {"front": "山", back:"やま•サン•ザン, mountain"},
-                    {"front": "かわ", back:"かわ•がわ•セン, river"},
-                    {"front": "田", back:"た•だ•デン, rice paddy"},
-                    {"front": "人", back:"ひと•ジン•ニン, person"},
-                    {"front": "上", back:"うえ•かみ•あ（がる）, on; up; above"},
-                    {"front": "中", back:"なか•チュウ, in; middle; center"},
-                    {"front": "下", back:"した•くだ（さい）•カ•ゲ, under; below"},
-                    {"front": "小", back:"ちい（さい）•ショウ, small"},
-                    {"front": "日", back:"ひ•び•ニチ•ニ•ジツ•カ, sun; day"},
-                    {"front": "本", back:"もと•ホン•ボン•ポン, root; origin; book"}
-                ]},
-                {"name": "Chapter 6", "cards": [
-                    {"front": "今", back:"いま•コン, now"},
-                    {"front": "私", back:"わたし•わたくし, I (myself); private"},
-                    {"front": "月", back:"つき•ゲツ•ガツ, moon; month"},
-                    {"front": "火", back:"ひ•カ, fire"},
-                    {"front": "水", back:"みず•スイ, water"},
-                    {"front": "木", back:"き•モク, tree; wood"},
-                    {"front": "金", back:"かわ•キン, gold; money; metal"},
-                    {"front": "土", back:"つち•と•ど, earth; soil; ground"},
-                    {"front": "曜", back:"ヨウ, day of the week"},
-                    {"front": "何", back:"なに•なん, what"},
-                    {"front": "週", back:"シュウ, week"},
-                    {"front": "末", back:"すえ•マツ, end"},
-                    {"front": "休", back:"やす（む）•キュウ, to rest"}
-                ]},{"name": "Chapter 7", "cards": [
-                    {"front": "時", back:"とき　ジ, time; hour"},
-                    {"front": "間", back:"あいだ　カン, interval; duration"},
-                    {"front": "分", back:"わ（ける）　わ（かる）　フン　ブン　プン, to divide; to understand; minute"},
-                    {"front": "半", back:"ハン, half"},
-                    {"front": "毎", back:"マイ, every"},
-                    {"front": "年", back:"とし　ネン, year"},
-                    {"front": "好", back:"す（き）　コウ, to like"},
-                    {"front": "語", back:"かた（る）　ゴ, language; word"},
-                    {"front": "高", back:"たか（い）　コウ, high; tall; expensive"},
-                    {"front": "番", back:"バン, number; order; turn"},
-                    {"front": "方", back:"かた　ホウ, direction; person (polite)"},
-                    {"front": "新", back:"あたら（しい）　シン, new"},
-                    {"front": "古", back:"ふる（い）　コ, old"},
-                    {"front": "安", back:"やす（い）　アン, inexpensive; cheap"},
-                    {"front": "友", back:"とも　ユウ, friend"}
+                {name: "Chapter 5", cards: [
+                    {front: "山", back:"やま•サン•ザン\nmountain"},
+                    {front: "川", back:"かわ•がわ•セン\nriver"},
+                    {front: "田", back:"た•だ•デン\nrice paddy"},
+                    {front: "人", back:"ひと•ジン•ニン\nperson"},
+                    {front: "上", back:"うえ•かみ•あ（がる）\non, up, above"},
+                    {front: "中", back:"なか•チュウ\nin, middle, center"},
+                    {front: "下", back:"した•くだ（さい）•カ•ゲ\nunder, below"},
+                    {front: "小", back:"ちい（さい）•ショウ\nsmall"},
+                    {front: "日", back:"ひ•び•ニチ•ニ•ジツ•カ\nsun, day"},
+                    {front: "本", back:"もと•ホン•ボン•ポン\nroot, origin, book"}
+                ]},{name: "Chapter 6", cards: [
+                    {front: "今", back:"いま•コン\nnow"},
+                    {front: "私", back:"わたし•わたくし\nI (myself); private"},
+                    {front: "月", back:"つき•ゲツ•ガツ\nmoon, month"},
+                    {front: "火", back:"ひ•カ\nfire"},
+                    {front: "水", back:"みず•スイ\nwater"},
+                    {front: "木", back:"き•モク\ntree, wood"},
+                    {front: "金", back:"かわ•キン\ngold, money, metal"},
+                    {front: "土", back:"つち•と•ど\nearth, soil, ground"},
+                    {front: "曜", back:"ヨウ\nday of the week"},
+                    {front: "何", back:"なに•なん\nwhat"},
+                    {front: "週", back:"シュウ\nweek"},
+                    {front: "末", back:"すえ•マツ\nend"},
+                    {front: "休", back:"やす（む）•キュウ\nto rest"}
+                ]},{name: "Chapter 7", cards: [
+                    {front: "時", back:"とき•ジ\ntime, hour"},
+                    {front: "間", back:"あいだ•カン\ninterval, duration"},
+                    {front: "分", back:"わ（ける）•わ（かる）•フン•ブン•プン\nto divide, to understand, minute"},
+                    {front: "半", back:"ハン\nhalf"},
+                    {front: "毎", back:"マイ\nevery"},
+                    {front: "年", back:"とし•ネン\nyear"},
+                    {front: "好", back:"す（き）•コウ\nto like"},
+                    {front: "語", back:"かた（る）•ゴ\nlanguage, word"},
+                    {front: "高", back:"たか（い）•コウ\nhigh, tall, expensive"},
+                    {front: "番", back:"バン\nnumber, order, turn"},
+                    {front: "方", back:"かた•ホウ\ndirection, person (polite)"},
+                    {front: "新", back:"あたら（しい）•シン\nnew"},
+                    {front: "古", back:"ふる（い）•コ\nold"},
+                    {front: "安", back:"やす（い）•アン\ninexpensive, cheap"},
+                    {front: "友", back:"とも•ユウ\nfriend"}
                 ]}
             ];
         }]);
     </script>
 </head>
 <body ng-app="testModule" >
-   <div flash-card-set card-groups="exampleCardGroups"></div>
+   <div class="text-center " flash-card-set card-groups="exampleCardGroups" style="width: 750px; margin: auto"></div>
 </body>
 </html>

@@ -1,16 +1,4 @@
-angular.module("ngFlashCard",[]);
-angular.module('ngFlashCard').directive("flashCard",[function(){
-    return {
-        controller: ["$scope",function($scope){
-            $scope.flipped = false;
-            $scope.flip = function(){
-                $scope.flipped = !$scope.flipped;
-            };
-        }]
-
-    };
-}]);
-angular.module('ngFlashCard').directive("flashCardSet",[function () {
+angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
     return {
         scope:{
              cardGroups: "="
@@ -19,6 +7,7 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
             $scope.selectedGroups=[];
             $scope.activeGroup = 0;
             $scope.activeCard = 0;
+            $scope.backFirst = false;
             
             var doPrevious = function(){
                 $scope.activeGroup--;
@@ -75,20 +64,28 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
             },true);
         }],
         template:
-            '<div class="ngFlashCard-cardSet">'+
-                '<ul class="form-group ngFlashCard-groupSelector">' +
-                    '<li ng-repeat="cardGroup in cardGroups">' +
+        '<div class="container-fluid ngFlashCard-cardSet ngFlashCard-fullHeight">'+
+            '<div class="row ngFlashCard-fullHeight">'+
+                '<ul class="ngFlashCard-groupSelector col-sm-3 list-group">' +
+                    '<li ng-repeat="cardGroup in cardGroups" class="list-group-item">' +
                         '<input type="checkbox" ng-model="selectedGroups[$index]" ng-init="selectedGroups[$index] = true"/>{{cardGroup.name}}' +
                     '</li>' +
                 '</ul>' +
-                '<div class="ngFlashCard-previous" ng-click="previous()">&lt;</div> <div class="ngFlashCard-next" ng-click="next()">&gt;</div>' +
-                '<div ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
-                    '<div ng-repeat="card in cardGroup.cards" ng-if="activeCard === $index">' +
-                        '<div class="ngFlashCard-card" ng-click="flipped = !flipped" ng-init="flipped=false">' +
-                        "{{flipped ? card.back : card.front}}"+
+                '<div class="well well-sm text-center col-sm-9 ngFlashCard-fullHeight ngFlashCard-wrapper">'+
+                    '<div class="ngFlashCard-cardHeader">'+
+                        '<div class="ngFlashCard-pageButton" ng-click="previous()" >Previous</div>' +
+                        '<div class="ngFlashCard-backFirst"><input type="checkbox" ng-model="backFirst">Answers First</div>' +
+                        '<div class="ngFlashCard-pageButton" ng-click="next()" >Next</div>' +
+                    '</div>'+
+                    '<div class="ngFlashCard-cardGroup" ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
+                        '<div class="ngFlashCard-fullHeight" ng-repeat="card in cardGroup.cards" ng-if="activeCard === $index">' +
+                            '<pre class="ngFlashCard-card ngFlashCard-fullHeight" ng-click="flipped = !flipped" ng-init="flipped=false">' +
+                                "<h1>{{flipped ? backFirst ? card.front : card.back : backFirst ? card.back : card.front}}</h1>"+
+                            '</pre>'+
                         '</div>'+
                     '</div>'+
                 '</div>'+
-            '<div>'
+            '</div>'+
+        '</div>'
     };
 }]);
