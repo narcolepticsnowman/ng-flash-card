@@ -18,10 +18,10 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
                 }
             };
             
-            $scope.next = function(){
+            $scope.next = function(nextGroup){
                 var lastGroup = $scope.activeGroup;
                 $scope.activeCard++;
-                if($scope.activeCard >= $scope.cardGroups[$scope.activeGroup].cards.length){
+                if(nextGroup || $scope.activeCard >= $scope.cardGroups[$scope.activeGroup].cards.length){
                     $scope.activeGroup++;
                     $scope.activeCard = 0;
                     if($scope.activeGroup >= $scope.cardGroups.length){
@@ -44,22 +44,7 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
                 for(var i=0; i<newVal.length; i++){
                     if(newVal[i] === false){
                         if(scope.activeGroup === i){
-                            scope.activeGroup++;
-                            scope.activeCard=0;
-                            if(scope.activeGroup >= $scope.cardGroups.length){
-                                scope.activeGroup = 0;
-                            }
-                            while(scope.selectedGroups[scope.activeGroup] === false){
-                                scope.activeGroup++;
-                                scope.activeCard=0;
-                                if(scope.activeGroup >= $scope.cardGroups.length){
-                                    scope.activeGroup = 0;
-                                }
-                                //no current active groups or only one
-                                if(scope.activeGroup === i){
-                                    break;
-                                }
-                            }
+                            scope.next(true);
                         }
                     }
                 }
