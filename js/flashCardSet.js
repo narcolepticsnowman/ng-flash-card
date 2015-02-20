@@ -70,8 +70,8 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
                     '</li>' +
                 '</ul>' +
                 '<div class="previousButton" ng-click="previous()">&lt;</div> <div class="nextButton" ng-click="next()">&gt;</div>' +
-                '<div ng-repeat="cardGroup in cardGroups" ng-show="selectedGroups[$index] && activeGroup === $index">' +
-                    '<div ng-repeat="card in cardGroup.cards" flash-card card="card"/>' +
+                '<div ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
+                    '<div ng-repeat="card in cardGroup.cards" flash-card card="card" ng-if="activeCard === $index"/>' +
                 '</div>'+
             '<div>'
     };

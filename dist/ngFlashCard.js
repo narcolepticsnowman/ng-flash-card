@@ -3,13 +3,12 @@ angular.module('ngFlashCard').directive("flashCard",[function(){
     return {
         controller: ["$scope",function($scope){
             $scope.flipped = false;
-            $scope.active=0;
             $scope.flip = function(){
                 $scope.flipped = !$scope.flipped;
             };
         }],
         template:
-            '<div class="card" ng-click="flip()" ng-show="activeCard === $index">' +
+            '<div class="card" ng-click="flip()">' +
                 "{{flipped ? card.back : card.front}}"+
             '</div>'
     };
@@ -86,8 +85,8 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
                     '</li>' +
                 '</ul>' +
                 '<div class="previousButton" ng-click="previous()">&lt;</div> <div class="nextButton" ng-click="next()">&gt;</div>' +
-                '<div ng-repeat="cardGroup in cardGroups" ng-show="selectedGroups[$index] && activeGroup === $index">' +
-                    '<div ng-repeat="card in cardGroup.cards" flash-card card="card"/>' +
+                '<div ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
+                    '<div ng-repeat="card in cardGroup.cards" flash-card card="card" ng-if="activeCard === $index"/>' +
                 '</div>'+
             '<div>'
     };
