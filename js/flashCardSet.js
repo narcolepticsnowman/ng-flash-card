@@ -63,15 +63,19 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
             },true);
         }],
         template:
-            '<div>'+
-                '<ul class="form-group cardGroupSelector">' +
+            '<div class="ngFlashCard-cardSet">'+
+                '<ul class="form-group ngFlashCard-groupSelector">' +
                     '<li ng-repeat="cardGroup in cardGroups">' +
                         '<input type="checkbox" ng-model="selectedGroups[$index]" ng-init="selectedGroups[$index] = true"/>{{cardGroup.name}}' +
                     '</li>' +
                 '</ul>' +
-                '<div class="previousButton" ng-click="previous()">&lt;</div> <div class="nextButton" ng-click="next()">&gt;</div>' +
+                '<div class="ngFlashCard-previous" ng-click="previous()">&lt;</div> <div class="ngFlashCard-next" ng-click="next()">&gt;</div>' +
                 '<div ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
-                    '<div ng-repeat="card in cardGroup.cards" flash-card card="card" ng-if="activeCard === $index"/>' +
+                    '<div ng-repeat="card in cardGroup.cards" ng-if="activeCard === $index">' +
+                        '<div class="ngFlashCard-card" ng-click="flipped = !flipped" ng-init="flipped=false">' +
+                        "{{flipped ? card.back : card.front}}"+
+                        '</div>'+
+                    '</div>'+
                 '</div>'+
             '<div>'
     };
