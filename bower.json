@@ -1,0 +1,27 @@
+{
+  "name": "ng-flash-card",
+  "version": "0.1.0",
+  "homepage": "https://github.com/narcolepticsnowman/ng-flash-card",
+  "authors": [
+    "Robert Kempton <r@snow87.com>"
+  ],
+  "description": "Flash cards for angular",
+  "keywords": [
+    "flash",
+    "card",
+    "angular"
+  ],
+  "license": "GPLV2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13",
+    "bootstrap": "~3.3.2"
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ngFlashCard Sample</title>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../dist/ngFlashCard.js"></script>
+    <link rel="stylesheet" href="../dist/ngFlashCard.min.css"/>
+    <script>
+        angular.module("testModule",['ngFlashCard']).run(['$rootScope',function($rootScope){
+            $rootScope.exampleCardGroups =[
+                {"name": "Chapter One", "cards": [
+                    {"front": "水", "back":"みず, water"},
+                    {"front": "人", "back":"ひと, person"}
+                ]},{"name": "Chapter two", "cards": [
+                    {"front": "飲", "back":"のみ, drink"}
+                ]}
+            ];
+        }]);
+    </script>
+</head>
+<body ng-app="testModule" >
+   <div flash-cards card-groups="exampleCardGroups"></div>
+</body>
+</html>
