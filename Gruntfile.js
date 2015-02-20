@@ -8,8 +8,7 @@ module.exports = function(grunt) {
         },
         concat: {
             dist: {
-                src: ['module.js','services/*.js','directives/*.js',
-                    'controllers/*.js'],
+                src: ['js/module.js','js/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -23,8 +22,7 @@ module.exports = function(grunt) {
             }
         },
         jshint:{
-            beforeconcat: ['module.js','services/*.js','directives/*.js',
-                'controllers/*.js'],
+            beforeconcat: ['js/module.js','js/*.js'],
             afterconcat: ['dist/<%= pkg.name %>.js']
         },
         cssmin:{
@@ -33,7 +31,7 @@ module.exports = function(grunt) {
                     banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */'
                 },
                 files:{
-                    'dist/<%= pkg.name %>.min.css':['styles/*.css']
+                    'dist/<%= pkg.name %>.min.css':['css/*.css']
                 }
             }
         },
@@ -50,7 +48,7 @@ module.exports = function(grunt) {
         },
         watch:{
             scripts:{
-                files: ['**/*.js'],
+                files: ['**/*.js','!**/dist/**'],
                 tasks: ['concat','uglify']
             },
             styles:{
