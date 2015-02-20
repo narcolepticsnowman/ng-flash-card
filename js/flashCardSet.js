@@ -7,14 +7,33 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
             $scope.selectedGroups=[];
             $scope.activeGroup = 0;
             $scope.activeCard = 0;
+            
+            var doPrevious = function(){
+                $scope.activeGroup--;
+                if($scope.activeGroup <0){
+                    $scope.activeGroup = $scope.cardGroups.length -1;
+                }
+            };
             $scope.previous = function(){
+                var lastGroup = $scope.activeGroup;
                 $scope.activeCard--;
                 if($scope.activeCard < 0){
-                    $scope.activeGroup--;
-                    if($scope.activeGroup <0){
-                        $scope.activeGroup = $scope.cardGroups.length -1;
+                    doPrevious();
+                    while($scope.selectedGroups[$scope.activeGroup] === false){
+                        doPrevious();
+                        //only one or no active groups
+                        if($scope.activeGroup === lastGroup){
+                            break;
+                        }
                     }
                     $scope.activeCard = $scope.cardGroups[$scope.activeGroup].cards.length -1;
+                }
+            };
+            
+            var doNext = function(){
+                $scope.activeGroup++;
+                if($scope.activeGroup >= $scope.cardGroups.length){
+                    $scope.activeGroup = 0;
                 }
             };
             
@@ -22,18 +41,11 @@ angular.module('ngFlashCard').directive("flashCardSet",[function () {
                 var lastGroup = $scope.activeGroup;
                 $scope.activeCard++;
                 if(nextGroup || $scope.activeCard >= $scope.cardGroups[$scope.activeGroup].cards.length){
-                    $scope.activeGroup++;
                     $scope.activeCard = 0;
-                    if($scope.activeGroup >= $scope.cardGroups.length){
-                        $scope.activeGroup = 0;
-                    }
+                    doNext();
                     while($scope.selectedGroups[$scope.activeGroup] === false){
-                        $scope.activeGroup++;
-                        $scope.activeCard=0;
-                        if($scope.activeGroup >= $scope.cardGroups.length){
-                            $scope.activeGroup = 0;
-                        }
-                        //no current active groups or only one
+                        doNext();
+                        //only one or no active groups
                         if($scope.activeGroup === lastGroup){
                             break;
                         }
