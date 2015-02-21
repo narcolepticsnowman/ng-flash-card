@@ -62,6 +62,9 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                     }
                 }
             },true);
+            $scope.showFront = function(flipped){
+                return flipped ? $scope.backFirst : !$scope.backFirst;
+            };
         }],
         template:
         '<div class="container-fluid ngFlashCard-cardSet ngFlashCard-fullHeight">'+
@@ -82,8 +85,10 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                     '</div>'+
                     '<div class="ngFlashCard-cardGroup" ng-repeat="cardGroup in cardGroups" ng-if="selectedGroups[$index] && activeGroup === $index">' +
                         '<div class="ngFlashCard-fullHeight" ng-repeat="card in cardGroup.cards" ng-if="activeCard === $index">' +
-                            '<pre class="ngFlashCard-card ngFlashCard-fullHeight" ng-click="flipped = !flipped" ng-init="flipped=false">' +
-                                "<h1>{{flipped ? backFirst ? card.front : card.back : backFirst ? card.back : card.front}}</h1>"+
+                            '<pre class="ngFlashCard-card ngFlashCard-fullHeight"' +
+                                 'ng-class="showFront(flipped) ? \'ngFlashCard-cardFront\' : \'ngFlashCard-cardBack\'"' +
+                                 'ng-click="flipped = !flipped" ng-init="flipped=false">' +
+                                "<h1>{{showFront(flipped) ? card.front : card.back }}</h1>"+
                             '</pre>'+
                         '</div>'+
                     '</div>'+
