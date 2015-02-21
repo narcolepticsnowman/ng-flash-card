@@ -9,10 +9,12 @@
   "keywords": [
     "flash",
     "card",
-    "angular"
+    "cards",
+    "angular",
+    "flashcard",
+    "flashcards"
   ],
   "license": "GPLV2",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
