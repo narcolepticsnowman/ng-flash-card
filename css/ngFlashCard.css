@@ -4,7 +4,7 @@
 .ngFlashCard-card > h1{
     position: absolute;
     top: 40%;
-    width: 100%;
+    width: 94%;
 }
 .ngFlashCard-fullHeight{
     min-height: 300px;
@@ -29,7 +29,7 @@
     margin-bottom: 10px;
 }
 .ngFlashCard-cardHeader > div{
-    margin: 0 30px;
+    margin: 0 2%;
 }
 
 .ngFlashCard-backFirst{
