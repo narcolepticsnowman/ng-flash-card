@@ -7,21 +7,44 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
             $scope.selectedGroups=[];
             $scope.activeGroup = 0;
             $scope.activeCard = 0;
+            $scope.shuffle = false;
             $scope.backFirst = false;
+
+            var getRandomInt = function(min,max){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            };
             
-            var doPrevious = function(){
+            var doShuffle = function(){
+                var randomIndex = getRandomInt(0,$scope.selectedGroups.length-1);
+                var nextActive=randomIndex;
+                //skip the first index so that we can do the nextActive!=randomIndex check later to avoid an infinite loop
+                do{
+                    nextActive++;
+                    if(nextActive > $scope.selectedGroups.length-1){
+                        nextActive=0;
+                    }
+                } while ($scope.selectedGroups[nextActive] === false && nextActive!==randomIndex);
+                if($scope.selectedGroups[nextActive] === false){
+                    //there are no active groups 
+                    return;
+                }
+                $scope.activeGroup = nextActive;
+                $scope.activeCard = getRandomInt(0,$scope.cardGroups[nextActive].cards.length-1);
+            };
+            var setPrevious = function(){
                 $scope.activeGroup--;
                 if($scope.activeGroup <0){
                     $scope.activeGroup = $scope.cardGroups.length -1;
                 }
             };
-            $scope.previous = function(){
+
+            var doPrevious = function(){
                 var lastGroup = $scope.activeGroup;
                 $scope.activeCard--;
                 if($scope.activeCard < 0){
-                    doPrevious();
+                    setPrevious();
                     while($scope.selectedGroups[$scope.activeGroup] === false){
-                        doPrevious();
+                        setPrevious();
                         //only one or no active groups
                         if($scope.activeGroup === lastGroup){
                             break;
@@ -30,22 +53,30 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                     $scope.activeCard = $scope.cardGroups[$scope.activeGroup].cards.length -1;
                 }
             };
+
+            $scope.previous = function(){
+                if($scope.shuffle){
+                    doShuffle();
+                } else {
+                    doPrevious();
+                }
+            };
             
-            var doNext = function(){
+            var setNext = function(){
                 $scope.activeGroup++;
                 if($scope.activeGroup >= $scope.cardGroups.length){
                     $scope.activeGroup = 0;
                 }
             };
             
-            $scope.next = function(nextGroup){
+            var doNext = function(nextGroup){
                 var lastGroup = $scope.activeGroup;
                 $scope.activeCard++;
                 if(nextGroup || $scope.activeCard >= $scope.cardGroups[$scope.activeGroup].cards.length){
                     $scope.activeCard = 0;
-                    doNext();
+                    setNext();
                     while($scope.selectedGroups[$scope.activeGroup] === false){
-                        doNext();
+                        setNext();
                         //only one or no active groups
                         if($scope.activeGroup === lastGroup){
                             break;
@@ -53,6 +84,15 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                     }
                 }
             };
+
+            $scope.next = function(nextGroup){
+                if($scope.shuffle){
+                    doShuffle();
+                } else {
+                    doNext(nextGroup);
+                }
+            };
+
             $scope.$watch('selectedGroups',function(newVal,oldVal,scope){
                 for(var i=0; i<newVal.length; i++){
                     if(newVal[i] === false){
@@ -62,6 +102,7 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                     }
                 }
             },true);
+
             $scope.showFront = function(flipped){
                 return flipped ? $scope.backFirst : !$scope.backFirst;
             };
@@ -78,8 +119,9 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                 '<div class="well well-sm text-center col-sm-9 ngFlashCard-fullHeight ngFlashCard-wrapper">'+
                     '<div class="ngFlashCard-cardHeader">'+
                         '<div class="ngFlashCard-pageButton" ng-click="previous()" >Previous</div>' +
-                        '<div class="ngFlashCard-clickable ngFlashCard-backFirst" ng-click="backFirst = !backFirst">' +
-                            '<input class="ngFlashCard-clickable" type="checkbox" ng-checked="backFirst">Answers First' +
+                        '<div class="ngFlashCard-clickable ngFlashCard-backFirst">' +
+                            '<div ng-click="backFirst = !backFirst"><input class="ngFlashCard-clickable" type="checkbox" ng-checked="backFirst">Answers First</div>' +
+                            '<div ng-click="shuffle = !shuffle"><input class="ngFlashCard-clickable" type="checkbox" ng-checked="shuffle">Shuffle</div>' +
                         '</div>' +
                         '<div class="ngFlashCard-pageButton" ng-click="next()" >Next</div>' +
                     '</div>'+
@@ -92,6 +134,7 @@ angular.module("ngFlashCard",[]).directive("flashCardSet",[function () {
                             '</pre>'+
                         '</div>'+
                     '</div>'+
+                    '<span>{{cardGroups[activeGroup].name}}</span>'+
                 '</div>'+
             '</div>'+
         '</div>'

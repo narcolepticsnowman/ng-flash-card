@@ -5,6 +5,7 @@
   "authors": [
     "Robert Kempton <r@snow87.com>"
   ],
+  "main": ["./dist/ngFlashCard.js","./dist/ngFlashCard.css"],
   "description": "Flash cards for angular",
   "keywords": [
     "flash",

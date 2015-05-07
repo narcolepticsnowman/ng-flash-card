@@ -1,0 +1,50 @@
+.ngFlashCard-card {
+    cursor: pointer;
+}
+.ngFlashCard-card > h1{
+    position: absolute;
+    top: 40%;
+    width: 94%;
+}
+.ngFlashCard-fullHeight{
+    min-height: 300px;
+}
+.ngFlashCard-groupSelector{
+    overflow-y: auto;
+}
+
+.ngFlashCard-cardGroup{
+    height: 85%;
+}
+
+.ngFlashCard-pageButton{
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.ngFlashCard-cardHeader{
+    margin-bottom: 10px;
+}
+.ngFlashCard-cardHeader > div{
+    margin: 0 2%;
+}
+
+.ngFlashCard-backFirst{
+    display: inline-block;
+}
+
+.ngFlashCard-wrapper{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ngFlashCard-clickable{
+    cursor: pointer;
+}

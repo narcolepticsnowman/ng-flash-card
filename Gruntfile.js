@@ -7,9 +7,13 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            dist: {
+            jsDist: {
                 src: ['js/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
+            },
+            cssDist: {
+                src: ['css/*.css'],
+                dest: 'dist/<%= pkg.name %>.css'
             }
         },
         uglify: {
